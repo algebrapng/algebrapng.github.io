@@ -1,45 +1,47 @@
-<!doctype html>
+# Re-run after reset (state cleared)
+import os, zipfile
+
+base = "/mnt/data/algebrapng_polished_site"
+assets = os.path.join(base, "assets")
+os.makedirs(assets, exist_ok=True)
+
+index_html = """<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Algebra PNG – Economic Modelling & Policy Advisory</title>
-  <meta name="description" content="Independent consulting service for economic modelling, project appraisal, energy economics, and policy advisory in Papua New Guinea." />
+  <meta name="description" content="Independent consulting service specialising in economic modelling, project appraisal, and policy advisory for Papua New Guinea and the Pacific." />
   <meta name="theme-color" content="#0f172a" />
   <link rel="icon" href="assets/favicon.svg">
   <style>
     :root{
       --bg:#0b1220;--card:#121a2a;--text:#e6e9f2;--muted:#b6bed1;
       --brand:#36c2b4;--brand2:#8ab4ff;--stroke:#22304a;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:14px;--maxw:1120px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);--radius:14px;--maxw:1120px
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:radial-gradient(1200px 600px at 80% -10%, rgba(54,194,180,.12), transparent 40%), var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Roboto,Inter,Arial,sans-serif;line-height:1.5}
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline;opacity:.95}
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:radial-gradient(1200px 600px at 80% -10%, rgba(54,194,180,.12), transparent 40%), var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
     header{position:sticky;top:0;background:linear-gradient(180deg, rgba(11,18,32,.92), rgba(11,18,32,.75));backdrop-filter:blur(12px);border-bottom:1px solid var(--stroke);z-index:50}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:36px;height:36px;display:grid;place-items:center;background:conic-gradient(from 210deg at 50% 50%, var(--brand), var(--brand2));border-radius:10px;box-shadow:var(--shadow)}
     .logo svg{width:22px;height:22px;fill:#0b1220}
-    .brand h1{font-size:1.05rem;margin:0;font-weight:700;letter-spacing:.3px}
+    .brand h1{font-size:1.05rem;margin:0;font-weight:700;letter-spacing:.2px}
     .brand small{display:block;color:var(--muted);font-weight:500}
     nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
-    nav a{color:var(--text);opacity:.9;font-weight:600}
-    .menu-btn{display:none}
-    .controls{display:flex;gap:10px;align-items:center}
-    .toggle{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--stroke);background:linear-gradient(180deg,#172036,#0f172a);padding:8px 10px;border-radius:10px;color:var(--text);cursor:pointer;font-weight:700}
+    nav a{color:var(--text);opacity:.95;font-weight:600}
     .hero{position:relative;overflow:hidden;padding:72px 0 48px}
-    .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;position:relative;z-index:1}
+    .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
     .kicker{color:var(--brand);font-weight:700;letter-spacing:.35em;text-transform:uppercase;font-size:.78rem;margin-bottom:10px;display:block}
-    .hero h2{font-size:clamp(1.9rem, 4vw, 3rem);line-height:1.1;margin:0 0 14px}
+    .hero h2{font-size:clamp(2rem, 4vw, 3.2rem);line-height:1.08;margin:0 0 14px}
     .lead{color:var(--muted);font-size:1.05rem;margin-bottom:22px}
     .cta{display:flex;gap:14px;flex-wrap:wrap}
     .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid var(--stroke);background:linear-gradient(180deg,#172036,#0f172a);color:var(--text);font-weight:700;box-shadow:var(--shadow)}
     .btn.primary{background:linear-gradient(180deg, var(--brand), #2fa89c);color:#06221f;border-color:transparent}
     .btn:hover{transform:translateY(-1px)}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--stroke);border-radius:var(--radius);padding:20px}
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0 64px}
     .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--stroke);border-radius:var(--radius);padding:18px}
     .card h3{margin:6px 0 6px;font-size:1.05rem}
@@ -47,34 +49,23 @@
     .pill{display:inline-block;padding:6px 10px;background:rgba(54,194,180,.12);color:var(--brand);border:1px solid rgba(54,194,180,.35);border-radius:999px;font-size:.78rem;font-weight:700;margin-bottom:8px}
     section{padding:32px 0}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    .panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--stroke);border-radius:var(--radius);padding:20px}
-    .panel h4{margin:8px 0 8px}
-    ul.clean{margin:0;padding-left:18px}
-    ul.clean li{margin:6px 0;color:var(--muted)}
+    ul.clean{margin:0;padding-left:18px} ul.clean li{margin:6px 0;color:var(--muted)}
     footer{margin-top:40px;border-top:1px solid var(--stroke);padding:24px 0;color:var(--muted)}
     .footgrid{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
-    .small{font-size:.9rem}
-    .spring, .blob{position:absolute;pointer-events:none;z-index:0;opacity:.55;filter:drop-shadow(0 20px 40px rgba(0,0,0,.35))}
+    .spring, .blob{position:absolute;pointer-events:none;z-index:0;opacity:.45;filter:drop-shadow(0 20px 40px rgba(0,0,0,.35))}
     .spring{right:-120px;top:-40px;width:380px;height:auto}
-    .blob{left:-160px;bottom:-140px;width:520px;height:520px;background:radial-gradient(circle at 30% 30%, rgba(54,194,180,.55), rgba(138,180,255,.35) 40%, rgba(255,255,255,0) 60%);border-radius:50%}
-    @keyframes bounce { 0%,100%{ transform: translateY(0) scaleY(1);} 45%{ transform: translateY(18px) scaleY(.96);} 55%{ transform: translateY(12px) scaleY(.98);} }
-    @keyframes drift  { 0%{transform:translate(0,0) rotate(0deg)} 50%{transform:translate(12px,-10px) rotate(1deg)} 100%{transform:translate(0,0) rotate(0deg)} }
-    .motion .spring svg{ animation: bounce 3.8s cubic-bezier(.2,.6,.2,1) infinite, drift 24s ease-in-out infinite; transform-origin:50% 10%; }
-    .motion .blob{ animation: drift 30s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce){ .spring svg, .blob { animation: none !important; } }
+    .blob{left:-160px;bottom:-140px;width:520px;height:520px;background:radial-gradient(circle at 30% 30%, rgba(54,194,180,.45), rgba(138,180,255,.30) 40%, rgba(255,255,255,0) 60%);border-radius:50%}
     @media (max-width: 900px){
       .hero .wrap{grid-template-columns:1fr}
       .cards{grid-template-columns:1fr;gap:12px}
       .grid-2{grid-template-columns:1fr}
-      nav ul{display:none;position:absolute;right:20px;top:58px;background:var(--card);border:1px solid var(--stroke);border-radius:12px;padding:10px 12px;box-shadow:var(--shadow)}
-      nav ul.open{display:block}
-      .menu-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;border:1px solid var(--stroke);background:linear-gradient(180deg,#172036,#0f172a);color:var(--text);font-weight:700}
-      .spring{opacity:.35;right:-160px;top:-60px;width:300px}
-      .blob{opacity:.35;left:-200px;bottom:-200px;width:480px;height:480px}
+      nav ul{gap:12px}
+      .spring{opacity:.3;right:-160px;top:-60px;width:300px}
+      .blob{opacity:.3;left:-200px;bottom:-200px;width:480px;height:480px}
     }
   </style>
 </head>
-<body class="motion">
+<body>
   <header>
     <div class="container nav">
       <div class="brand" aria-label="Algebra PNG brand">
@@ -89,7 +80,6 @@
         </div>
       </div>
       <nav aria-label="Primary">
-        <button class="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
         <ul id="menu">
           <li><a href="#services">Services</a></li>
           <li><a href="#sectors">Sectors</a></li>
@@ -97,9 +87,6 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <div class="controls">
-        <button id="motionToggle" class="toggle" aria-pressed="true" title="Toggle animations">🔁 Motion: On</button>
-      </div>
     </div>
   </header>
 
@@ -167,7 +154,7 @@
           <h4>Priority sectors</h4>
           <ul class="clean">
             <li>Minerals and energy</li>
-            <li>Infrastructure and transport</</li>
+            <li>Infrastructure and transport</li>
             <li>Agriculture and fisheries</li>
             <li>Climate and resilience</li>
             <li>Public finance and policy</li>
@@ -209,7 +196,7 @@
       <div class="panel">
         <div class="grid-2">
           <div>
-            <p class="small">Until our email and domain are ready, reach out on LinkedIn:</p>
+            <p class="small">Until our domain is ready, please reach out on LinkedIn:</p>
             <p><a href="#" aria-label="LinkedIn page link">LinkedIn: Algebra PNG – Economic Modelling & Policy Advisory</a></p>
           </div>
           <div>
@@ -228,29 +215,30 @@
     </div>
   </footer>
 
-  <script>
-    const menuBtn = document.querySelector('.menu-btn');
-    const menu = document.getElementById('menu');
-    if(menuBtn){
-      menuBtn.addEventListener('click', ()=>{
-        const open = menu.classList.toggle('open');
-        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    }
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    (function(){
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const body = document.body;
-      const btn = document.getElementById('motionToggle');
-      function set(on){
-        body.classList.toggle('motion', on);
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-        btn.textContent = on ? '🔁 Motion: On' : '⏸ Motion: Off';
-      }
-      set(!prefersReduced);
-      btn.addEventListener('click', ()=> set(!body.classList.contains('motion')));
-    })();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+"""
+
+with open(os.path.join(base, "index.html"), "w", encoding="utf-8") as f:
+    f.write(index_html)
+
+# assets
+with open(os.path.join(assets, "logo-apng.svg"), "w") as f:
+    f.write("""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="apng-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#36c2b4"/><stop offset="100%" stop-color="#8ab4ff"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="12" fill="url(#apng-g)"/><path d="M22 46h20l-3.2-6.4H25.2L22 46Zm6.8-14.6h6.4L54 54H10l18.8-37.6Zm3.2-12.4 4 8h-8l4-8z" fill="#0b1220"/></svg>""")
+
+with open(os.path.join(assets, "favicon.svg"), "w") as f:
+    f.write("""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#36c2b4"/><stop offset="100%" stop-color="#8ab4ff"/></linearGradient></defs><rect x="4" y="4" width="56" height="56" rx="12" fill="url(#g)"/><path d="M24 46h16l-2.6-5.2H26.6L24 46Zm5.6-12h4.8L52 52H12l17.6-35.2Zm2.4-10 3 6h-6l3-6z" fill="#0b1220"/></svg>""")
+
+with open(os.path.join(base, "README.md"), "w") as f:
+    f.write("# Algebra PNG – Website (Polished)\n\nStatic site with dark theme, professional layout, and responsive design. No motion toggle.\n")
+
+zip_path = "/mnt/data/algebrapng-polished-site.zip"
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for root, _, files in os.walk(base):
+        for name in files:
+            p = os.path.join(root, name)
+            z.write(p, os.path.relpath(p, base))
+
+
+
