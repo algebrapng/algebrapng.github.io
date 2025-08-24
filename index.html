@@ -1,175 +1,246 @@
-<!DOCTYPE html>
+# Re-run after reset (state cleared)
+import os, zipfile
+
+base = "/mnt/data/algebrapng_polished_site"
+assets = os.path.join(base, "assets")
+os.makedirs(assets, exist_ok=True)
+
+index_html = """<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Algebra PNG – Economic Modelling & Policy Advisory</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="description" content="Independent consulting service specialising in economic modelling, project appraisal, and policy advisory for Papua New Guinea and the Pacific." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="assets/favicon.svg">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0a0a0a;
-      color: #f2f2f2;
-      line-height: 1.6;
+    :root{
+      --bg:#0b1220;--card:#121a2a;--text:#e6e9f2;--muted:#b6bed1;
+      --brand:#36c2b4;--brand2:#8ab4ff;--stroke:#22304a;
+      --shadow:0 10px 30px rgba(0,0,0,.35);--radius:14px;--maxw:1120px
     }
-    header {
-      background: #111;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #222;
-    }
-    header img {
-      height: 40px;
-    }
-    nav a {
-      color: #f2f2f2;
-      text-decoration: none;
-      margin-left: 1.5rem;
-      font-weight: 500;
-    }
-    nav a:hover {
-      color: #00c896;
-    }
-    .hero {
-      text-align: center;
-      padding: 5rem 2rem;
-      background: linear-gradient(160deg, #0a0a0a 60%, #003c32);
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      color: #ddd;
-    }
-    .cta-buttons {
-      margin-top: 2rem;
-    }
-    .cta-buttons a {
-      background: #00c896;
-      color: #0a0a0a;
-      padding: 0.8rem 1.5rem;
-      margin: 0 0.5rem;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .cta-buttons a:hover {
-      background: #00a87c;
-    }
-    section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #fff;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: #111;
-      padding: 2rem;
-      border-radius: 8px;
-      border: 1px solid #222;
-    }
-    .card h3 {
-      color: #00c896;
-      margin-bottom: 0.5rem;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #111;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-    footer a {
-      color: #00c896;
-      text-decoration: none;
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:radial-gradient(1200px 600px at 80% -10%, rgba(54,194,180,.12), transparent 40%), var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;background:linear-gradient(180deg, rgba(11,18,32,.92), rgba(11,18,32,.75));backdrop-filter:blur(12px);border-bottom:1px solid var(--stroke);z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:36px;height:36px;display:grid;place-items:center;background:conic-gradient(from 210deg at 50% 50%, var(--brand), var(--brand2));border-radius:10px;box-shadow:var(--shadow)}
+    .logo svg{width:22px;height:22px;fill:#0b1220}
+    .brand h1{font-size:1.05rem;margin:0;font-weight:700;letter-spacing:.2px}
+    .brand small{display:block;color:var(--muted);font-weight:500}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--text);opacity:.95;font-weight:600}
+    .hero{position:relative;overflow:hidden;padding:72px 0 48px}
+    .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+    .kicker{color:var(--brand);font-weight:700;letter-spacing:.35em;text-transform:uppercase;font-size:.78rem;margin-bottom:10px;display:block}
+    .hero h2{font-size:clamp(2rem, 4vw, 3.2rem);line-height:1.08;margin:0 0 14px}
+    .lead{color:var(--muted);font-size:1.05rem;margin-bottom:22px}
+    .cta{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid var(--stroke);background:linear-gradient(180deg,#172036,#0f172a);color:var(--text);font-weight:700;box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(180deg, var(--brand), #2fa89c);color:#06221f;border-color:transparent}
+    .btn:hover{transform:translateY(-1px)}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--stroke);border-radius:var(--radius);padding:20px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0 64px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));border:1px solid var(--stroke);border-radius:var(--radius);padding:18px}
+    .card h3{margin:6px 0 6px;font-size:1.05rem}
+    .card p{color:var(--muted);margin:0}
+    .pill{display:inline-block;padding:6px 10px;background:rgba(54,194,180,.12);color:var(--brand);border:1px solid rgba(54,194,180,.35);border-radius:999px;font-size:.78rem;font-weight:700;margin-bottom:8px}
+    section{padding:32px 0}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    ul.clean{margin:0;padding-left:18px} ul.clean li{margin:6px 0;color:var(--muted)}
+    footer{margin-top:40px;border-top:1px solid var(--stroke);padding:24px 0;color:var(--muted)}
+    .footgrid{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}
+    .spring, .blob{position:absolute;pointer-events:none;z-index:0;opacity:.45;filter:drop-shadow(0 20px 40px rgba(0,0,0,.35))}
+    .spring{right:-120px;top:-40px;width:380px;height:auto}
+    .blob{left:-160px;bottom:-140px;width:520px;height:520px;background:radial-gradient(circle at 30% 30%, rgba(54,194,180,.45), rgba(138,180,255,.30) 40%, rgba(255,255,255,0) 60%);border-radius:50%}
+    @media (max-width: 900px){
+      .hero .wrap{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr;gap:12px}
+      .grid-2{grid-template-columns:1fr}
+      nav ul{gap:12px}
+      .spring{opacity:.3;right:-160px;top:-60px;width:300px}
+      .blob{opacity:.3;left:-200px;bottom:-200px;width:480px;height:480px}
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="assets/logo-apng.svg" alt="Algebra PNG Logo">
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#sectors">Sectors</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="container nav">
+      <div class="brand" aria-label="Algebra PNG brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" aria-label="A">
+            <path d="M6 18h12l-1.8-3.6h-8.4L6 18zm4.4-8.2h3.2L21 21H3l7.4-14.8zM12 3l2.4 4.8H9.6L12 3z"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Algebra PNG</h1>
+          <small>Economic Modelling &amp; Policy Advisory</small>
+        </div>
+      </div>
+      <nav aria-label="Primary">
+        <ul id="menu">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#sectors">Sectors</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <h1>Clarity from Complexity</h1>
-    <p>Rigorous economic modelling and policy analysis for Papua New Guinea. We provide independent, transparent, and professional advice to support better decision-making.</p>
-    <div class="cta-buttons">
-      <a href="#services">Our Services</a>
-      <a href="#contact">Get in Touch</a>
-    </div>
-  </section>
-
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Economic Modelling</h3>
-        <p>Building models that explain and forecast key sectors of the economy, using transparent and evidence-based methods.</p>
+  <main id="main">
+    <section class="hero">
+      <div class="spring" aria-hidden="true">
+        <svg viewBox="0 0 240 360" width="100%" height="100%" role="img" aria-label="Decorative spring">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#36c2b4"/><stop offset="100%" stop-color="#8ab4ff"/></linearGradient></defs>
+          <path d="M30 60 C 90 10, 150 110, 210 60
+                   M30 120 C 90 70, 150 170, 210 120
+                   M30 180 C 90 130, 150 230, 210 180
+                   M30 240 C 90 190, 150 290, 210 240
+                   M30 300 C 90 250, 150 350, 210 300"
+                stroke="url(#g)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <div class="card">
-        <h3>Project Appraisal</h3>
-        <p>Assessment of major projects with tools such as Net Present Value, Internal Rate of Return, Benefit–Cost Ratio, and Real Options.</p>
-      </div>
-      <div class="card">
-        <h3>Policy Advisory</h3>
-        <p>Design and evaluation of public policies, with distributional impact analysis across households, industries, and regions.</p>
-      </div>
-      <div class="card">
-        <h3>Energy & Climate Advisory</h3>
-        <p>Advising on energy transitions and climate policy to support sustainable and inclusive growth.</p>
-      </div>
-    </div>
-  </section>
+      <div class="blob" aria-hidden="true"></div>
 
-  <section id="sectors">
-    <h2>Sectors We Support</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      We work across government, industry, and development partners in Papua New Guinea. Our expertise supports better decision-making in infrastructure, resources, climate, and social policy.
-    </p>
-  </section>
+      <div class="container wrap">
+        <div>
+          <span class="kicker">Modern, model‑driven consulting</span>
+          <h2>Clarity from complexity.</h2>
+          <p class="lead">We help leaders make sound decisions with rigorous economics: economy‑wide modelling, project appraisal, energy analysis, and policy strategy across Papua New Guinea and the Pacific.</p>
+          <div class="cta">
+            <a class="btn primary" href="#contact">Start a conversation</a>
+            <a class="btn" href="#services">Explore services</a>
+          </div>
+        </div>
+        <div class="panel">
+          <h4>What we deliver</h4>
+          <ul class="clean">
+            <li>Cost–benefit analysis with transparent uncertainty (net present value, internal rate of return, benefit–cost ratio).</li>
+            <li>Economy‑wide impacts using computable general equilibrium and input–output frameworks.</li>
+            <li>Energy and resources market analysis, carbon accounting, and scenarios.</li>
+            <li>Policy design and fiscal analysis for sustainable growth.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      Algebra PNG is an independent economic and policy advisory initiative. We aim to deliver clarity from complexity, providing rigorous, transparent, and practical analysis for Papua New Guinea.
-    </p>
-  </section>
+    <section id="services" class="container">
+      <h3>Services</h3>
+      <div class="cards" role="list">
+        <article class="card" role="listitem">
+          <span class="pill">Economic Analysis</span>
+          <h3>Economy‑wide modelling &amp; forecasting</h3>
+          <p>Macroeconomic and sector modelling for project appraisal, taxation, and policy reform. From calibration to scenario design and clear presentation of results.</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="pill">Project Appraisal</span>
+          <h3>Cost–benefit &amp; strategy</h3>
+          <p>Full economic appraisal with distributional impacts, sensitivity analysis, and practical, funder‑ready recommendations.</p>
+        </article>
+        <article class="card" role="listitem">
+          <span class="pill">Energy &amp; Climate</span>
+          <h3>Markets, carbon &amp; sustainability</h3>
+          <p>Energy and commodity insights, carbon footprints and abatement costing, and sustainability metrics aligned to investor and donor standards.</p>
+        </article>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p style="text-align:center;">
-      Connect with us on <a href="#">LinkedIn</a> – Algebra PNG.
-    </p>
-  </section>
+    <section id="sectors">
+      <div class="container grid-2">
+        <div class="panel">
+          <h4>Priority sectors</h4>
+          <ul class="clean">
+            <li>Minerals and energy</li>
+            <li>Infrastructure and transport</li>
+            <li>Agriculture and fisheries</li>
+            <li>Climate and resilience</li>
+            <li>Public finance and policy</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Typical engagements</h4>
+          <ul class="clean">
+            <li>Export wharf and cold‑chain cost–benefit analysis (donor‑funded).</li>
+            <li>Royalty and fiscal regime analysis for national budgeting.</li>
+            <li>Renewable integration scenarios and carbon abatement costing.</li>
+            <li>Mining project economic impact and local content analysis.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="container">
+      <h3>About</h3>
+      <div class="grid-2">
+        <div class="panel">
+          <h4>Who we are</h4>
+          <p class="small">Algebra PNG is an independent consulting service specialising in economic modelling and policy advisory. We combine technical depth with clear communication so decision‑makers can act with confidence.</p>
+        </div>
+        <div class="panel">
+          <h4>Technical capabilities</h4>
+          <ul class="clean">
+            <li>Computable general equilibrium and input–output modelling</li>
+            <li>Forecasting and econometrics</li>
+            <li>Cost–benefit analysis and investment under uncertainty</li>
+            <li>Carbon accounting and energy systems analysis</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="container">
+      <h3>Contact</h3>
+      <div class="panel">
+        <div class="grid-2">
+          <div>
+            <p class="small">Until our domain is ready, please reach out on LinkedIn:</p>
+            <p><a href="#" aria-label="LinkedIn page link">LinkedIn: Algebra PNG – Economic Modelling & Policy Advisory</a></p>
+          </div>
+          <div>
+            <p class="small">Location</p>
+            <p>Port Moresby, Papua New Guinea · PNG · Pacific</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 Algebra PNG. All rights reserved.</p>
+    <div class="container footgrid">
+      <div class="small">© <span id="year"></span> Algebra PNG – Economic Modelling &amp; Policy Advisory</div>
+      <div class="small">PNG · Pacific · Global</div>
+    </div>
   </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+"""
+
+with open(os.path.join(base, "index.html"), "w", encoding="utf-8") as f:
+    f.write(index_html)
+
+# assets
+with open(os.path.join(assets, "logo-apng.svg"), "w") as f:
+    f.write("""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="apng-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#36c2b4"/><stop offset="100%" stop-color="#8ab4ff"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="12" fill="url(#apng-g)"/><path d="M22 46h20l-3.2-6.4H25.2L22 46Zm6.8-14.6h6.4L54 54H10l18.8-37.6Zm3.2-12.4 4 8h-8l4-8z" fill="#0b1220"/></svg>""")
+
+with open(os.path.join(assets, "favicon.svg"), "w") as f:
+    f.write("""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#36c2b4"/><stop offset="100%" stop-color="#8ab4ff"/></linearGradient></defs><rect x="4" y="4" width="56" height="56" rx="12" fill="url(#g)"/><path d="M24 46h16l-2.6-5.2H26.6L24 46Zm5.6-12h4.8L52 52H12l17.6-35.2Zm2.4-10 3 6h-6l3-6z" fill="#0b1220"/></svg>""")
+
+with open(os.path.join(base, "README.md"), "w") as f:
+    f.write("# Algebra PNG – Website (Polished)\n\nStatic site with dark theme, professional layout, and responsive design. No motion toggle.\n")
+
+zip_path = "/mnt/data/algebrapng-polished-site.zip"
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for root, _, files in os.walk(base):
+        for name in files:
+            p = os.path.join(root, name)
+            z.write(p, os.path.relpath(p, base))
+
+zip_path
 
 
 
