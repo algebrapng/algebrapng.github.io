@@ -4,129 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Algebra PNG – Economic Modelling & Policy Advisory</title>
-  <meta name="description" content="Independent, transparent economic modelling and policy advisory for Papua New Guinea. Services include project appraisal, policy analysis, and energy & climate advisory." />
+  <meta name="description" content="Independent, transparent economic modelling and policy advisory for Papua New Guinea. Services include project appraisal, policy analysis, energy & climate advisory, and modern asset pricing." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <style>
     :root{
       --bg:#0a0a0a; --panel:#111; --border:#222; --text:#f2f2f2; --muted:#ddd;
-      --brand:#00c896; --brand-d:#00a87c; --maxw:1000px;
+      --brand:#00c896; --brand-d:#00a87c; --maxw:1100px;
     }
-
-    /* Base */
     html{scroll-behavior:smooth}
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height:1.6;
-    }
-    a{color:var(--brand); text-decoration:none}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--brand);text-decoration:none}
     a:hover{color:var(--brand-d)}
-    a:focus-visible{
-      outline:2px solid var(--brand);
-      outline-offset:2px;
-      border-radius:4px;
-    }
-
-    /* Header */
-    header{
-      background:var(--panel);
-      border-bottom:1px solid var(--border);
-      padding:1rem 2rem;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:1rem;
-    }
+    a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
+    header{background:var(--panel);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
     header img{height:40px}
-    nav{display:flex; flex-wrap:wrap; gap:1.25rem}
-    nav a{color:var(--text); font-weight:500}
+    nav{display:flex;flex-wrap:wrap;gap:1.25rem}
+    nav a{color:var(--text);font-weight:500}
     nav a:hover{color:var(--brand)}
-
-    /* Sections */
-    section{
-      padding:4rem 2rem;
-      max-width:var(--maxw);
-      margin:0 auto;
-    }
+    section{padding:4rem 2rem;max-width:var(--maxw);margin:0 auto}
     h1,h2{margin:0 0 1rem}
-    h2{text-align:center; color:#fff}
+    h2{text-align:center;color:#fff}
     p{margin:0}
-
-    /* Hero */
-    .hero{
-      text-align:center;
-      background:linear-gradient(160deg, var(--bg) 60%, #003c32);
-      padding:5rem 2rem;
-    }
-    .hero h1{font-size:2.5rem; color:#fff}
-    .hero p{
-      font-size:1.2rem;
-      max-width:700px;
-      margin:0 auto;
-      color:var(--muted);
-    }
-    .cta-buttons{margin-top:2rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap}
-    .cta-buttons a{
-      background:var(--brand);
-      color:#0a0a0a;
-      padding:.8rem 1.5rem;
-      border-radius:6px;
-      font-weight:bold;
-    }
+    .hero{text-align:center;background:linear-gradient(160deg, var(--bg) 60%, #003c32);padding:5rem 2rem}
+    .hero h1{font-size:2.5rem;color:#fff}
+    .hero p{font-size:1.2rem;max-width:760px;margin:0 auto;color:var(--muted)}
+    .cta-buttons{margin-top:2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+    .cta-buttons a{background:var(--brand);color:#0a0a0a;padding:.8rem 1.5rem;border-radius:6px;font-weight:bold}
     .cta-buttons a:hover{background:var(--brand-d)}
-
-    /* Cards */
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
-      gap:1.5rem;
-    }
-    .card{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:8px;
-      padding:2rem;
-    }
-    .card h3{color:var(--brand); margin:0 0 .5rem}
-
-    /* Footer */
-    footer{
-      background:var(--panel);
-      border-top:1px solid var(--border);
-      text-align:center;
-      color:#aaa;
-      font-size:.9rem;
-      padding:2rem;
-    }
+    .cards{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:1.25rem}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.25rem}
+    .card h3{color:var(--brand);margin:.25rem 0 .5rem;font-size:1.05rem}
+    .card p{color:var(--muted)}
+    footer{background:var(--panel);border-top:1px solid var(--border);text-align:center;color:#aaa;font-size:.9rem;padding:2rem}
     footer a{color:var(--brand)}
-
-    /* Mobile tweaks */
-    @media (max-width:620px){
-      .hero h1{font-size:2.1rem}
-      header{padding:1rem}
-      nav{gap:1rem}
-    }
+    @media (max-width:620px){ .hero h1{font-size:2.1rem} header{padding:1rem} nav{gap:1rem} }
   </style>
 </head>
 <body>
   <header>
-    <img src="assets/logo-apng.svg" alt="Algebra PNG logo" />
+    <a href="index.html" aria-label="Algebra PNG home">
+      <img src="assets/logo-apng.svg" alt="Algebra PNG logo" />
+    </a>
     <nav aria-label="Primary">
       <a href="#services">Services</a>
       <a href="#sectors">Sectors</a>
       <a href="#about">About</a>
+      <a href="services.html">Detailed Services</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <section class="hero" id="home">
     <h1>Clarity from Complexity</h1>
-    <p>Rigorous economic modelling and policy analysis for Papua New Guinea. We provide independent, transparent, and professional advice to support better decision-making.</p>
+    <p>Rigorous economic modelling and policy analysis for Papua New Guinea. Independent, transparent, and practical advice to support better decision-making.</p>
     <div class="cta-buttons">
       <a href="#services">Our Services</a>
+      <a href="services.html">See Details</a>
       <a href="#contact">Get in Touch</a>
     </div>
   </section>
@@ -135,35 +69,47 @@
     <h2 id="services-title">Our Services</h2>
     <div class="cards">
       <article class="card">
-        <h3>Economic Modelling</h3>
-        <p>Models that explain and forecast key sectors of the economy using transparent, evidence-based methods.</p>
+        <h3>Economic Modelling & Forecasting</h3>
+        <p>CGE and Input–Output models for policy and investment impacts; econometrics for macro and commodity trends.</p>
       </article>
       <article class="card">
-        <h3>Project Appraisal</h3>
-        <p>Assessment of major projects using Net Present Value, Internal Rate of Return, Benefit–Cost Ratio, and real options thinking.</p>
+        <h3>Project Appraisal & Investment</h3>
+        <p>DCF and NPV evaluation; cost of capital and discount rates; decision trees for risk-neutral and risk-averse choices.</p>
       </article>
       <article class="card">
-        <h3>Policy Advisory</h3>
-        <p>Design and evaluation of public policies, including distributional analysis across households, industries, and regions.</p>
+        <h3>Modern Asset Pricing & Real Options</h3>
+        <p>MAP and ROV to value flexibility under uncertainty using stochastic models and binomial lattices.</p>
       </article>
       <article class="card">
-        <h3>Energy &amp; Climate Advisory</h3>
-        <p>Advice on energy transitions and climate policy to support sustainable and inclusive growth.</p>
+        <h3>Energy, Climate & Carbon</h3>
+        <p>Carbon content calculation, carbon pricing and offsets, Levelised Cost of Energy (LCOE), abatement curves, energy policy.</p>
+      </article>
+      <article class="card">
+        <h3>Market & Strategic Advisory</h3>
+        <p>Supply–demand outlooks, competition analysis (HHI), and commodity portfolio strategy.</p>
+      </article>
+      <article class="card">
+        <h3>Corporate Finance & Growth</h3>
+        <p>Debt and equity structures, due diligence for M&A, and capital raising scenarios.</p>
+      </article>
+      <article class="card">
+        <h3>Governance & Boardroom</h3>
+        <p>Governance protocols, reconciliation of stakeholder interests, and change management support.</p>
       </article>
     </div>
   </section>
 
   <section id="sectors" aria-labelledby="sectors-title">
     <h2 id="sectors-title">Sectors We Support</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      We work across government, industry, and development partners in Papua New Guinea. Our expertise supports better decision-making in infrastructure, resources, climate, and social policy.
+    <p style="text-align:center; max-width:760px; margin:auto;">
+      We work with government, industry, and development partners across minerals and energy, infrastructure and transport, agriculture and fisheries, and climate and social policy.
     </p>
   </section>
 
   <section id="about" aria-labelledby="about-title">
     <h2 id="about-title">About Us</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      Algebra PNG is an independent economic and policy advisory initiative. We aim to deliver clarity from complexity through rigorous, transparent, and practical analysis for Papua New Guinea.
+    <p style="text-align:center; max-width:760px; margin:auto;">
+      Algebra PNG is an independent economic and policy advisory service. We translate complex models into clear, decision-ready insights for Papua New Guinea and the Pacific.
     </p>
   </section>
 
@@ -175,13 +121,10 @@
   </section>
 
   <footer>
-    <p>&copy; <span id="year"></span> Algebra PNG. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> Algebra PNG. All rights reserved. · <a href="services.html">Detailed Services</a></p>
   </footer>
 
-  <script>
-    // tiny progressive enhancement: current year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
 
