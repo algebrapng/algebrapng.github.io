@@ -3,20 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Detailed Services – Algebra PNG</title>
-  <meta name="description" content="Detailed services by Algebra PNG: economic modelling, CGE, input–output analysis, project appraisal, modern asset pricing, real options valuation, energy and climate advisory, market analysis, corporate finance support, and policy decision-support." />
+  <title>Services – Algebra PNG</title>
+  <meta name="description" content="Algebra PNG provides independent economic analysis across four areas: Economic Modelling & Forecasting, Project Appraisal & Investment Analysis, Energy, Climate & Carbon Advisory, and Strategy, Governance & Policy." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Social / SEO -->
+  <meta property="og:title" content="Services – Algebra PNG" />
+  <meta property="og:description" content="Clear, evidence-based services for PNG: modelling & forecasting, project appraisal, energy & carbon, and strategy & governance." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://algebrapng.github.io/services.html" />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <style>
     :root{
       --bg:#0a0a0a; --panel:#111; --border:#222; --text:#f2f2f2; --muted:#ddd;
-      --brand:#00c896; --brand-d:#00a87c; --maxw:1100px;
+      --brand:#00c896; --brand-d:#00a87c; --maxw:1100px; --focus:#92ffe3;
     }
     html{scroll-behavior:smooth}
     *{box-sizing:border-box}
     body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
     a{color:var(--brand);text-decoration:none}
     a:hover{color:var(--brand-d)}
-    a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
+    a:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
     header{background:var(--panel);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
     header .sitename{font-size:1.2rem;font-weight:bold;color:var(--text)}
     nav{display:flex;flex-wrap:wrap;gap:1.25rem}
@@ -25,110 +34,93 @@
     main{max-width:var(--maxw);margin:0 auto;padding:2rem}
     h1,h2{margin:0 0 1rem}
     h1{font-size:2rem}
-    section{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin:1rem 0}
-    h3{margin:.25rem 0 .5rem;color:var(--brand)}
+    .intro{color:#cfd8d3; max-width:860px}
+    section.service{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin:1rem 0}
+    h3{margin:.25rem 0 .5rem;color:var(--brand);font-size:1.15rem}
+    .lead{margin:0 0 .5rem;color:#e9f8f3}
     ul{margin:.5rem 0 0 1.1rem}
     li{margin:.35rem 0;color:var(--muted)}
-    .value{margin-top:.5rem;color:#cfd8d3}
+    .value{margin-top:.65rem;color:#cfd8d3}
+    .back{margin-top:1.5rem}
     footer{background:var(--panel);border-top:1px solid var(--border);text-align:center;color:#aaa;font-size:.9rem;padding:2rem;margin-top:2rem}
     @media (max-width:620px){ header{padding:1rem} nav{gap:1rem} }
   </style>
 </head>
 <body>
-  <header>
+  <header role="banner">
     <div class="sitename">Algebra PNG</div>
     <nav aria-label="Primary">
       <a href="index.html#services">Services</a>
-      <a href="index.html#sectors">Sectors</a>
       <a href="index.html#about">About</a>
       <a href="index.html#contact">Contact</a>
     </nav>
   </header>
 
   <main>
-    <h1>Detailed Services</h1>
+    <h1>Our Services</h1>
+    <p class="intro">
+      We keep the detail straightforward here. Each service can be tailored to your needs, with technical methods and models provided in proposals when helpful.
+    </p>
 
-    <section>
+    <!-- 1. Economic Modelling & Forecasting -->
+    <section class="service" id="modelling">
       <h3>Economic Modelling & Forecasting</h3>
+      <p class="lead">Clear, evidence-based analysis of PNG’s economy, markets, and competition.</p>
       <ul>
-        <li><strong>Computable General Equilibrium (CGE)</strong> and <strong>Input–Output (I–O)</strong> modelling to evaluate government policy, taxation, subsidies, and investment impacts.</li>
-        <li><strong>Econometrics & forecasting</strong> for macroeconomic indicators, sector output, and commodity prices.</li>
-        <li><strong>Mineral market analysis & forecasting</strong>, including <strong>Herfindahl–Hirschman Index (HHI)</strong> for competition assessment.</li>
+        <li>Macroeconomic and sector forecasts; scenario analysis and stress-testing.</li>
+        <li>CGE and input–output approaches where economy-wide effects matter.</li>
+        <li>Econometrics for policy evaluation and market/price dynamics.</li>
+        <li>Competition and market structure assessments.</li>
       </ul>
-      <p class="value"><em>Value:</em> Evidence-based insights into how policies and projects shape PNG’s economy.</p>
+      <p class="value"><em>Value:</em> Turns data and models into actionable insights for planning and policy.</p>
     </section>
 
-    <section>
+    <!-- 2. Project Appraisal & Investment Analysis -->
+    <section class="service" id="appraisal">
       <h3>Project Appraisal & Investment Analysis</h3>
+      <p class="lead">Transparent evaluations of project viability and risk for public and private decisions.</p>
       <ul>
-        <li><strong>Discounted Cash Flow (DCF)</strong> and <strong>Net Present Value (NPV)</strong> evaluation of mining, energy, and infrastructure projects.</li>
-        <li><strong>Cost of capital & discount rate analysis</strong> (WACC, sovereign and financing risk).</li>
-        <li><strong>Decision trees</strong> to compare risk-neutral and risk-averse investment pathways.</li>
-        <li><strong>LCOE-linked appraisals</strong> where energy cost drives project viability.</li>
+        <li>DCF/NPV and cost-of-capital assessments aligned to PNG risk context.</li>
+        <li>Decision trees and scenario frameworks for choices under uncertainty.</li>
+        <li>Integration with energy cost drivers (e.g., LCOE) when relevant.</li>
       </ul>
-      <p class="value"><em>Value:</em> Transparent, robust investment appraisals aligned to real-world risk.</p>
+      <p class="value"><em>Value:</em> Supports sound investment choices, grounded in real-world risk.</p>
     </section>
 
-    <section>
-      <h3>Modern Asset Pricing & Real Options Valuation</h3>
-      <ul>
-        <li><strong>Modern Asset Pricing (MAP)</strong> to capture commodity volatility and separate risky revenues from more stable costs.</li>
-        <li><strong>Real Options Valuation (ROV)</strong> to recognise the value of flexibility (expand, delay, suspend, abandon).</li>
-        <li>Use of <strong>stochastic models, binomial lattices, and replicating portfolio methods</strong> for realistic valuation.</li>
-        <li>Address DCF limitations by adding option value to traditional project evaluations.</li>
-      </ul>
-      <p class="value"><em>Value:</em> Reveals hidden option value in volatile projects, improving investment decisions.</p>
-    </section>
-
-    <section>
+    <!-- 3. Energy, Climate & Carbon Advisory -->
+    <section class="service" id="energy">
       <h3>Energy, Climate & Carbon Advisory</h3>
+      <p class="lead">Practical guidance that balances growth, sustainability, and finance requirements.</p>
       <ul>
-        <li><strong>Carbon content calculation</strong> for projects and portfolios.</li>
-        <li><strong>Carbon pricing & offsets</strong> — evaluate offset markets and integrate pricing into project economics.</li>
-        <li><strong>Levelised Cost of Energy (LCOE) calculation</strong> to benchmark renewable and conventional energy projects.</li>
-        <li><strong>Abatement cost curves & scenarios</strong> to identify least-cost emission reduction options.</li>
-        <li><strong>Energy policy & transition economics</strong>, including fiscal and market impacts.</li>
+        <li>Carbon accounting and pricing strategies, including offsets.</li>
+        <li>Levelised Cost of Energy (LCOE) benchmarks for renewable and conventional options.</li>
+        <li>Abatement cost curves and transition scenarios for least-cost pathways.</li>
+        <li>Energy policy and market analysis, including fiscal impacts.</li>
       </ul>
-      <p class="value"><em>Value:</em> Cost-effective pathways to manage carbon risk and align with sustainable finance requirements.</p>
+      <p class="value"><em>Value:</em> Cost-effective pathways to manage carbon and meet sustainability goals.</p>
     </section>
 
-    <section>
-      <h3>Market & Strategic Advisory</h3>
+    <!-- 4. Strategy, Governance & Policy -->
+    <section class="service" id="strategy">
+      <h3>Strategy, Governance & Policy</h3>
+      <p class="lead">Independent advice to strengthen institutions, transparency, and long-term strategy.</p>
       <ul>
-        <li><strong>Supply–demand outlooks</strong> for minerals and energy, including transition minerals.</li>
-        <li><strong>Competition analysis</strong> (HHI) and industry strategy.</li>
-        <li><strong>Portfolio strategy</strong> across commodities to support resilience and long-term growth.</li>
+        <li>Long-term outlooks and portfolio strategy across sectors.</li>
+        <li>Financing strategies and capital-raising options analysis.</li>
+        <li>Policy design, evaluation, and distributional impact analysis.</li>
+        <li>Decision-support for ministers, boards, and development partners.</li>
       </ul>
-      <p class="value"><em>Value:</em> Supports long-term strategy and competitive positioning.</p>
+      <p class="value"><em>Value:</em> Builds trust in decision-making and supports resilient, inclusive growth.</p>
     </section>
 
-    <section>
-      <h3>Corporate Finance & Growth</h3>
-      <ul>
-        <li><strong>Independent analysis</strong> to support financing decisions in resource and energy projects.</li>
-        <li>Apply <strong>option pricing</strong> and <strong>real options modelling</strong> to inform mergers, acquisitions, and partnerships.</li>
-        <li>Assist in assessing <strong>capital raising options</strong> through evidence-based scenarios (debt, equity, or hybrids).</li>
-      </ul>
-      <p class="value"><em>Value:</em> Provides transparent, model-driven insights for financing strategies and growth opportunities.</p>
-    </section>
-
-    <section>
-      <h3>Policy & Decision-Support Advisory</h3>
-      <ul>
-        <li><strong>Translate complex models</strong> into clear, actionable insights for ministers, boards, and communities.</li>
-        <li><strong>Distributional impact analysis</strong> across households, industries, and regions.</li>
-        <li>Balance <strong>economic, social, and environmental objectives</strong> in policy design and evaluation.</li>
-      </ul>
-      <p class="value"><em>Value:</em> Builds trust and transparency in decision-making processes.</p>
-    </section>
-
-    <p style="margin-top:1.5rem"><a href="index.html">← Back to homepage</a></p>
+    <p class="back"><a href="index.html">← Back to homepage</a></p>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <p>&copy; <span id="year"></span> Algebra PNG. All rights reserved. · <a href="index.html#contact">Contact</a></p>
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+
